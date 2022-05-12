@@ -9,6 +9,8 @@ from imports import serviceAccounts
 
 GCP_PROJECT_ID = "sr-cdktf-test"
 TF_SERVICE_ACCOUNT= "sr-cdktf-test-tf-sa@sr-cdktf-test.iam.gserviceaccount.com"
+GCP_REGION = "us-central1"
+GCP_ZONE = "us-central1-a"
 
 class MyStack(TerraformStack):
     def __init__(self, scope: Construct, ns: str):
@@ -18,8 +20,8 @@ class MyStack(TerraformStack):
             id= "sr-cdktf-test",
             impersonate_service_account=TF_SERVICE_ACCOUNT, 
             project= GCP_PROJECT_ID, 
-            region= "us-central1", 
-            zone= "us-central1-a"
+            region= GCP_REGION, 
+            zone= GCP_ZONE
         )
         
         project_apis = projectFactory.ProjectFactory(self, 
@@ -33,7 +35,10 @@ class MyStack(TerraformStack):
             project_id= GCP_PROJECT_ID,
             network_name= "sr-cdktf-test-vpc",
             routing_mode= "GLOBAL",
-            subnets=[["subnet01","us-central1","10.1.1.0/24"]]
+            subnets=[{
+                "subnet_name": "subnet01",
+                "subnet_region": GCP_REGION,
+                "subnet_ip": "10.1.1.0/24"}]
         )
 
 
