@@ -18,6 +18,11 @@
       "name": "projectFactory",
       "source": "terraform-google-modules/project-factory/google//modules/project_services",
       "version": "~> 13.0.0"
+    },
+    {
+      "name": "cloudNat",
+      "source": "terraform-google-modules/cloud-nat/google",
+      "version": "~> 2.2.0"
     }
   ],
   "codeMakerOutput": "imports",
