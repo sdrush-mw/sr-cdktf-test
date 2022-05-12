@@ -1,0 +1,28 @@
+{
+  "language": "python",
+  "app": "pipenv run python main.py",
+  "projectId": "6097a82d-cf51-4e92-b5bd-c2c9f5d25bf6",
+  "terraformProviders": ["google@~> 4.19"],
+  "terraformModules": [
+   {
+      "name": "network",
+      "source": "terraform-google-modules/network/google",
+      "version": "~> 5.0"
+    },
+    {
+      "name": "serviceAccounts",
+      "source": "terraform-google-modules/service-accounts/google",
+      "version": "~> 4.1.1"
+    },
+    {
+      "name": "projectFactory",
+      "source": "terraform-google-modules/project-factory/google//modules/project_services",
+      "version": "~> 13.0.0"
+    }
+  ],
+  "codeMakerOutput": "imports",
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+}
