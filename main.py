@@ -2,10 +2,12 @@
 from constructs import Construct
 from cdktf import App, TerraformStack
 from cdktf_cdktf_provider_google import GoogleProvider
+from imports import google
 from imports import network
 from imports import cloudNat
 from imports import projectFactory
-from imports import serviceAccounts
+from imports import instanceTemplate
+from imports import vmInstance
 
 GCP_PROJECT_ID = "sr-cdktf-test"
 GCP_NETWORK_NAME = "sr-cdktf-test-vpc"
@@ -28,7 +30,7 @@ class MyStack(TerraformStack):
         project_apis = projectFactory.ProjectFactory(self, 
             id = "project_apis",
             project_id = GCP_PROJECT_ID, 
-            activate_apis = ["compute.googleapis.com"]
+            activate_apis = ["compute.googleapis.com", "iam.googleapis.com"]
         )
 
         test_vpc = network.Network(self,
@@ -51,6 +53,30 @@ class MyStack(TerraformStack):
             router = "sr-cdktf-test-vpc-usc1-natrtr01",
             name = "sr-cdktf-test-vpc-usc1-natgw01"
         )
+
+        test_sa = google.ServiceAccount(self,
+            id = "test_sa", 
+            project = GCP_PROJECT_ID,
+            account_id = "test-vm-sa"
+        )
+
+        # test_template = instanceTemplate.InstanceTemplate(self,
+        #     id = "test_template",
+        #     project_id = GCP_PROJECT_ID,
+        #     region = GCP_REGION,
+        #     subnetwork = "subnet01",
+        #     service_account = 
+        # )
+
+        # test_vm = vmInstance.VmInstance(self,
+        #     id = "test_vm_instance",
+        #     hostname = "vm01-deb-usc1a",
+        #     add_hostname_suffix= False,
+        #     region = GCP_REGION,
+        #     subnetwork = "subnet01",
+        #     zone = GCP_ZONE,
+        #     instance_template=
+        # )
 
 app = App()
 MyStack(app, "sr-cdktf-test")

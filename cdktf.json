@@ -1,28 +1,33 @@
 {
-  "language": "python",
-  "app": "pipenv run python main.py",
-  "projectId": "6097a82d-cf51-4e92-b5bd-c2c9f5d25bf6",
-  "terraformProviders": ["google@~> 4.19"],
-  "terraformModules": [
+  "language" : "python",
+  "app" : "pipenv run python main.py",
+  "projectId" : "6097a82d-cf51-4e92-b5bd-c2c9f5d25bf6",
+  "terraformProviders" : ["google@~> 4.19"],
+  "terraformModules" : [
    {
-      "name": "network",
-      "source": "terraform-google-modules/network/google",
-      "version": "~> 5.0"
+      "name" : "network",
+      "source" : "terraform-google-modules/network/google",
+      "version" : "~> 5.0"
     },
     {
-      "name": "serviceAccounts",
-      "source": "terraform-google-modules/service-accounts/google",
-      "version": "~> 4.1.1"
+      "name" : "projectFactory",
+      "source" : "terraform-google-modules/project-factory/google//modules/project_services",
+      "version" : "~> 13.0.0"
     },
     {
-      "name": "projectFactory",
-      "source": "terraform-google-modules/project-factory/google//modules/project_services",
-      "version": "~> 13.0.0"
+      "name" : "cloudNat",
+      "source" : "terraform-google-modules/cloud-nat/google",
+      "version" : "~> 2.2.0"
     },
     {
-      "name": "cloudNat",
-      "source": "terraform-google-modules/cloud-nat/google",
-      "version": "~> 2.2.0"
+      "name": "instanceTemplate",
+      "source": "terraform-google-modules/vm/google//modules/instance_template",
+      "version": "~> 7.7.0"
+    },
+    {
+      "name" : "vmInstance",
+      "source" : "terraform-google-modules/vm/google//modules/compute_instance",
+      "version" : "~> 7.7.0"
     }
   ],
   "codeMakerOutput": "imports",
